@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Customer Churn & Revenue Intelligence — Executive Report</title>
+<style>
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        color: #1E293B;
+        background-color: #FFFFFF;
+        line-height: 1.55;
+        font-size: 10.5pt;
+        margin: 0;
+        padding: 0;
+    }
+    .header-banner {
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        color: #FFFFFF;
+        padding: 28px 32px;
+        border-radius: 8px;
+        margin-bottom: 24px;
+        border-bottom: 4px solid #06B6D4;
+    }
+    h1 {
+        margin: 0 0 6px 0;
+        font-size: 20pt;
+        letter-spacing: -0.5px;
+        color: #F8FAFC;
+    }
+    .subtitle {
+        color: #06B6D4;
+        font-size: 12pt;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+    .meta-bar {
+        font-size: 9pt;
+        color: #94A3B8;
+        display: flex;
+        gap: 20px;
+    }
+    h2 {
+        color: #0F172A;
+        font-size: 14pt;
+        border-bottom: 2px solid #E2E8F0;
+        padding-bottom: 6px;
+        margin-top: 24px;
+        margin-bottom: 12px;
+    }
+    h3 {
+        color: #1E293B;
+        font-size: 11pt;
+        margin-top: 14px;
+        margin-bottom: 4px;
+    }
+    .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    .kpi-card {
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-left: 4px solid #06B6D4;
+        border-radius: 6px;
+        padding: 12px;
+    }
+    .kpi-card.danger {
+        border-left-color: #F43F5E;
+    }
+    .kpi-card.success {
+        border-left-color: #10B981;
+    }
+    .kpi-card.warning {
+        border-left-color: #F59E0B;
+    }
+    .kpi-title {
+        font-size: 7.5pt;
+        font-weight: 700;
+        color: #64748B;
+        text-transform: uppercase;
+    }
+    .kpi-value {
+        font-size: 15pt;
+        font-weight: 800;
+        color: #0F172A;
+        margin: 4px 0;
+    }
+    .kpi-sub {
+        font-size: 7.5pt;
+        color: #64748B;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0 20px 0;
+        font-size: 9pt;
+    }
+    th {
+        background: #0F172A;
+        color: #FFFFFF;
+        text-align: left;
+        padding: 8px 10px;
+        font-weight: 600;
+    }
+    td {
+        padding: 7px 10px;
+        border-bottom: 1px solid #E2E8F0;
+    }
+    tr:nth-child(even) {
+        background: #F8FAFC;
+    }
+    .insight-box {
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 6px;
+        padding: 10px 14px;
+        margin-bottom: 12px;
+    }
+    .insight-title {
+        font-weight: 700;
+        color: #0F172A;
+        font-size: 10pt;
+        margin-bottom: 4px;
+    }
+    .badge {
+        display: inline-block;
+        padding: 2px 6px;
+        font-size: 7.5pt;
+        font-weight: 700;
+        border-radius: 4px;
+        background: #E0F2FE;
+        color: #0284C7;
+    }
+    .badge-danger {
+        background: #FFE4E6;
+        color: #E11D48;
+    }
+    .badge-success {
+        background: #DCFCE7;
+        color: #16A34A;
+    }
+    .page-break {
+        page-break-before: always;
+    }
+</style>
+</head>
+<body>
+
+<div class="header-banner">
+    <h1>CUSTOMER CHURN & REVENUE INTELLIGENCE</h1>
+    <div class="subtitle">Executive Business Insights & Strategic Monetization Report</div>
+    <div class="meta-bar">
+        <span><strong>Prepared For:</strong> Executive Leadership Team</span>
+        <span><strong>Scope:</strong> 8,500 Customer Accounts</span>
+        <span><strong>Portfolio Base:</strong> $18.74M Invoiced | $470.5K MRR</span>
+        <span><strong>Date:</strong> January 2026</span>
+    </div>
+</div>
+
+<div class="kpi-grid">
+    <div class="kpi-card success">
+        <div class="kpi-title">Active Customers</div>
+        <div class="kpi-value">5,802</div>
+        <div class="kpi-sub">68.26% Retention Rate</div>
+    </div>
+    <div class="kpi-card danger">
+        <div class="kpi-title">Overall Churn Rate</div>
+        <div class="kpi-value">31.74%</div>
+        <div class="kpi-sub">2,698 Total Accounts Lost</div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-title">Active MRR</div>
+        <div class="kpi-value">$470,499</div>
+        <div class="kpi-sub">$5.65M Annual Run-Rate</div>
+    </div>
+    <div class="kpi-card danger">
+        <div class="kpi-title">Monthly Revenue Lost</div>
+        <div class="kpi-value">$205,777</div>
+        <div class="kpi-sub">$2.47M Annual Churn Loss</div>
+    </div>
+</div>
+
+<h2>EXECUTIVE SUMMARY</h2>
+<p>
+This comprehensive analytics study evaluates <strong>8,500 customer records</strong> across 18 behavioral and monetization dimensions to pinpoint the root causes of customer churn, quantify immediate revenue exposure, and outline high-ROI operational retention strategies.
+</p>
+<p>
+<strong>Key Takeaway:</strong> The company currently loses <strong>$205,776.91 every month ($2.47M annualized)</strong> to customer churn. Over 94% of this loss is concentrated in Month-to-Month contracts, with customer support friction and competitor pricing serving as the primary behavioral catalysts.
+</p>
+
+<h2>TOP 10 ANALYTICAL INSIGHTS</h2>
+
+<div class="insight-box">
+    <div class="insight-title">1. The Month-to-Month Contract Vulnerability <span class="badge badge-danger">High Severity</span></div>
+    <p>Month-to-month contracts exhibit an acute <strong>40.7% churn rate</strong> versus 11.1% for 1-year and 3.2% for 2-year contracts. Month-to-month accounts for <strong>94.8% of all churns</strong>, destroying <strong>$196,712/month</strong> in contracted revenue.</p>
+</div>
+
+<div class="insight-box">
+    <div class="insight-title">2. Electronic Check Payment Friction <span class="badge badge-danger">42.4% of Total Loss</span></div>
+    <p>Customers on Month-to-Month contracts paying via Electronic Check suffer an <strong>84.85% churn rate</strong>. This single sub-cohort loses <strong>$87,348.18/month ($1.05M ARR)</strong> due to lack of automated payment frictionlessness.</p>
+</div>
+
+<div class="insight-box">
+    <div class="insight-title">3. The 0–6 Month Onboarding Cliff <span class="badge badge-danger">47.2% of All Exits</span></div>
+    <p>Customer attrition is heavily front-loaded: <strong>71.37% of customers in Months 0–6 churn</strong>. Once customers pass the 24-month threshold, churn drops below 12%, and beyond 48 months collapses to <strong>3.57%</strong>.</p>
+</div>
+
+<div class="insight-box">
+    <div class="insight-title">4. Support Ticket Escalation Tipping Point <span class="badge">Operational Friction</span></div>
+    <p>Customers logging 0 tickets churn at 25.68%. At 3 tickets, churn increases to <strong>40.52%</strong>; at 5+ tickets, churn surges past <strong>80.0%</strong>. Recurring unresolved technical issues destroy customer trust.</p>
+</div>
+
+<div class="insight-box">
+    <div class="insight-title">5. Revenue Concentration (Pareto Principle) <span class="badge">Monetization</span></div>
+    <p>The top 20% of customers generate <strong>51.29% of total lifetime revenue</strong> ($9.61M of $18.74M). Account retention programs must prioritize high-decile accounts to protect the core balance sheet.</p>
+</div>
+
+<div class="page-break"></div>
+
+<div class="insight-box">
+    <div class="insight-title">6. Stated Churn Reasons: Competitor Pricing & Speeds Dominate <span class="badge">Market Competition</span></div>
+    <p>Competitor pricing accounts for <strong>31.28% of churned revenue ($75,551/mo)</strong>, followed by poor customer support at <strong>23.94% ($46,795/mo)</strong>, and competitor speed offerings at <strong>16.31% ($31,010/mo)</strong>.</p>
+</div>
+
+<div class="insight-box">
+    <div class="insight-title">7. Subscription Tier Vulnerability: Standard & Premium Bleed <span class="badge">Product Strategy</span></div>
+    <p>Standard and Premium tiers generate the majority of MRR but also lose <strong>$83,210/mo</strong> and <strong>$76,540/mo</strong> respectively (77.6% of all lost recurring cashflow).</p>
+</div>
+
+<div class="insight-box">
+    <div class="insight-title">8. Digital Engagement Precedes Churn by 45–60 Days <span class="badge">Early Warning</span></div>
+    <p>Customers logging &lt;20 platform usage hours per month churn at <strong>48.76%</strong>, compared to <strong>23.20%</strong> for power users (&gt;120 hrs/mo), providing a proactive window for customer success re-engagement.</p>
+</div>
+
+<div class="insight-box">
+    <div class="insight-title">9. Regional Churn Hotspots <span class="badge">Geographic</span></div>
+    <p>Texas metros (Dallas: 33.79%, San Antonio: 33.72%, Austin: 32.85%) suffer the highest attrition due to intense local competitive promotions and aggressive fiber buildouts.</p>
+</div>
+
+<div class="insight-box">
+    <div class="insight-title">10. Quantified Machine Learning Risk Tiers <span class="badge badge-danger">Immediate Revenue at Risk</span></div>
+    <p>The predictive ML model identified <strong>647 active paying customers</strong> with &gt;50% churn risk representing <strong>$52,210.16 in monthly revenue ($626,522 ARR)</strong> currently at risk.</p>
+</div>
+
+<h2>5 STRATEGIC ACTIONABLE RECOMMENDATIONS</h2>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Strategic Initiative</th>
+            <th>Action Plan</th>
+            <th>Expected Financial ROI</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>1</strong></td>
+            <td><strong>Payment & Contract Conversion Campaign</strong></td>
+            <td>Offer $10/mo discount for 6 months to convert Electronic Check users to auto-pay credit card and annual contracts.</td>
+            <td><strong>+$21,800 / month</strong><br>($261.6K ARR)</td>
+        </tr>
+        <tr>
+            <td><strong>2</strong></td>
+            <td><strong>Overhaul First 90 Days Onboarding</strong></td>
+            <td>Automated onboarding workflows, early usage alerts, and dedicated VIP setup calls for Standard/Premium plans.</td>
+            <td><strong>+$33,600 / month</strong><br>($403.2K ARR)</td>
+        </tr>
+        <tr>
+            <td><strong>3</strong></td>
+            <td><strong>Support Ticket Circuit Breaker at 2 Tickets</strong></td>
+            <td>Automated escalation to Senior Engineering and assignment of a dedicated Retention Manager on 2nd ticket.</td>
+            <td><strong>+$17,500 / month</strong><br>($210.0K ARR)</td>
+        </tr>
+        <tr>
+            <td><strong>4</strong></td>
+            <td><strong>Proactive Outreach to 647 High-Risk Accounts</strong></td>
+            <td>Equip Customer Success with the ML risk list (`high_risk_customers_to_contact.csv`) for targeted retention calls.</td>
+            <td><strong>+$20,884 / month</strong><br>($250.6K ARR)</td>
+        </tr>
+        <tr>
+            <td><strong>5</strong></td>
+            <td><strong>Competitive Price-Match Guarantee</strong></td>
+            <td>Empower retention agents with pre-approved 15% 12-month re-commitment discounts to counter competitor poaching.</td>
+            <td><strong>+$26,440 / month</strong><br>($317.3K ARR)</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>FINANCIAL SENSITIVITY & RECOVERY MODEL</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Scenario</th>
+            <th>Churn Rate</th>
+            <th>Preserved Accounts</th>
+            <th>Monthly MRR Recovered</th>
+            <th>Annual ARR Recovered</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Current Baseline</strong></td>
+            <td>31.74%</td>
+            <td>5,802</td>
+            <td>$0.00</td>
+            <td>$0.00</td>
+        </tr>
+        <tr>
+            <td><strong>Conservative Target (-2%)</strong></td>
+            <td>29.74%</td>
+            <td>+170 accounts</td>
+            <td>+$13,785 / mo</td>
+            <td>+$165,424 / yr</td>
+        </tr>
+        <tr>
+            <td><strong>Core Strategic Target (-5%)</strong></td>
+            <td>26.74%</td>
+            <td>+425 accounts</td>
+            <td>+$34,463 / mo</td>
+            <td><strong>+$413,559 / yr</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Aggressive Milestone (-10%)</strong></td>
+            <td>21.74%</td>
+            <td>+850 accounts</td>
+            <td>+$68,927 / mo</td>
+            <td><strong>+$827,118 / yr</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p style="font-size: 8.5pt; color: #64748B; text-align: center; margin-top: 30px;">
+    Customer Churn & Revenue Intelligence Platform — Confidential Executive Briefing — Generated January 2026
+</p>
+
+</body>
+</html>

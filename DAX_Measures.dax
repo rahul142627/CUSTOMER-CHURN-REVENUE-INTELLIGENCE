@@ -1,0 +1,224 @@
+// ============================================================================
+// CUSTOMER CHURN & REVENUE INTELLIGENCE
+// PRODUCTION DAX MEASURES LIBRARY (POWER BI)
+// Author: Senior BI Developer & Analytics Engineer
+// Dataset: customer_churn_cleaned
+// Target Model: Star Schema / Analytical Flat Table
+// ============================================================================
+
+// ============================================================================
+// 1. CORE CUSTOMER VOLUME & RETENTION MEASURES
+// ============================================================================
+
+Total Customers = 
+COUNTROWS('customer_churn_cleaned')
+
+Active Customers = 
+CALCULATE(
+    [Total Customers],
+    'customer_churn_cleaned'[Churn_Status] = "No"
+)
+
+Churned Customers = 
+CALCULATE(
+    [Total Customers],
+    'customer_churn_cleaned'[Churn_Status] = "Yes"
+)
+
+Churn Rate % = 
+DIVIDE(
+    [Churned Customers],
+    [Total Customers],
+    0
+)
+
+Retention Rate % = 
+DIVIDE(
+    [Active Customers],
+    [Total Customers],
+    0
+)
+
+// ============================================================================
+// 2. FINANCIAL & MONETIZATION MEASURES (MRR, ARR, ARPU, CLV)
+// ============================================================================
+
+Total Revenue = 
+SUM('customer_churn_cleaned'[Total_Charges])
+
+Active MRR = 
+CALCULATE(
+    SUM('customer_churn_cleaned'[Monthly_Charges]),
+    'customer_churn_cleaned'[Churn_Status] = "No"
+)
+
+Lost MRR = 
+CALCULATE(
+    SUM('customer_churn_cleaned'[Monthly_Charges]),
+    'customer_churn_cleaned'[Churn_Status] = "Yes"
+)
+
+Total Potential MRR = 
+SUM('customer_churn_cleaned'[Monthly_Charges])
+
+% Revenue Lost to Churn = 
+DIVIDE(
+    [Lost MRR],
+    [Total Potential MRR],
+    0
+)
+
+Active ARR = 
+[Active MRR] * 12
+
+Lost ARR = 
+[Lost MRR] * 12
+
+ARPU Active = 
+DIVIDE(
+    [Active MRR],
+    [Active Customers],
+    0
+)
+
+ARPU Blended = 
+DIVIDE(
+    [Total Potential MRR],
+    [Total Customers],
+    0
+)
+
+Customer Lifetime Value (CLV) = 
+DIVIDE(
+    [Total Revenue],
+    [Total Customers],
+    0
+)
+
+Active Base CLV = 
+CALCULATE(
+    AVERAGE('customer_churn_cleaned'[Total_Charges]),
+    'customer_churn_cleaned'[Churn_Status] = "No"
+)
+
+Churned Base CLV = 
+CALCULATE(
+    AVERAGE('customer_churn_cleaned'[Total_Charges]),
+    'customer_churn_cleaned'[Churn_Status] = "Yes"
+)
+
+// ============================================================================
+// 3. BEHAVIORAL & SERVICE FRICTION MEASURES
+// ============================================================================
+
+Avg Tenure Months = 
+AVERAGE('customer_churn_cleaned'[Tenure_Months])
+
+Avg Monthly Charges = 
+AVERAGE('customer_churn_cleaned'[Monthly_Charges])
+
+Avg Support Tickets = 
+AVERAGE('customer_churn_cleaned'[Support_Tickets])
+
+Avg Usage Hours = 
+AVERAGE('customer_churn_cleaned'[Usage_Hours])
+
+High Friction Customer Count = 
+CALCULATE(
+    [Total Customers],
+    'customer_churn_cleaned'[Support_Tickets] >= 3
+)
+
+Dormant User Count = 
+CALCULATE(
+    [Total Customers],
+    'customer_churn_cleaned'[Usage_Hours] < 20
+)
+
+// ============================================================================
+// 4. RISK & REVENUE EXPOSURE MEASURES
+// ============================================================================
+
+Revenue at Risk = 
+CALCULATE(
+    [Active MRR],
+    'customer_churn_cleaned'[Risk_Tier] IN {"High Risk", "Critical Risk"}
+)
+
+Annualized Revenue at Risk = 
+[Revenue at Risk] * 12
+
+Critical Risk Customer Count = 
+CALCULATE(
+    [Active Customers],
+    'customer_churn_cleaned'[Risk_Tier] = "Critical Risk"
+)
+
+High Risk Customer Count = 
+CALCULATE(
+    [Active Customers],
+    'customer_churn_cleaned'[Risk_Tier] = "High Risk"
+)
+
+High Value VIP At Risk Count = 
+CALCULATE(
+    [Active Customers],
+    'customer_churn_cleaned'[Monthly_Charges] >= 85,
+    'customer_churn_cleaned'[Contract_Type] = "Month-to-Month",
+    'customer_churn_cleaned'[Support_Tickets] >= 3
+)
+
+High Value VIP At Risk MRR = 
+CALCULATE(
+    [Active MRR],
+    'customer_churn_cleaned'[Monthly_Charges] >= 85,
+    'customer_churn_cleaned'[Contract_Type] = "Month-to-Month",
+    'customer_churn_cleaned'[Support_Tickets] >= 3
+)
+
+Avg Predicted Churn Probability = 
+AVERAGE('customer_churn_cleaned'[Risk_Score]) / 100
+
+// ============================================================================
+// 5. TIME INTELLIGENCE & MOM GROWTH MEASURES
+// Note: Requires Date table marked as Date Table in Power BI
+// ============================================================================
+
+MRR Prior Month = 
+CALCULATE(
+    [Active MRR],
+    DATEADD('Dim_Date'[Date], -1, MONTH)
+)
+
+MoM MRR Growth % = 
+DIVIDE(
+    [Active MRR] - [MRR Prior Month],
+    [MRR Prior Month],
+    0
+)
+
+Churn Rate Prior Month = 
+CALCULATE(
+    [Churn Rate %],
+    DATEADD('Dim_Date'[Date], -1, MONTH)
+)
+
+MoM Churn Rate Change Bps = 
+([Churn Rate %] - [Churn Rate Prior Month]) * 10000
+
+// ============================================================================
+// 6. DYNAMIC UI LABELS & KPI FORMATTING
+// ============================================================================
+
+KPI Subtitle Churn = 
+FORMAT([Churn Rate %], "0.0%") & " of total portfolio (" & FORMAT([Churned Customers], "#,##0") & " accounts)"
+
+KPI Subtitle Revenue Lost = 
+"Annualized run-rate loss: " & FORMAT([Lost ARR], "$#,##0")
+
+KPI Subtitle MRR = 
+"Annualized run-rate: " & FORMAT([Active ARR], "$#,##0")
+
+Dynamic Executive Headline = 
+"Executive Summary: " & FORMAT([Active Customers], "#,##0") & " Active Accounts generating " & 
+FORMAT([Active MRR], "$#,##0") & " MRR | Churn Loss: " & FORMAT([Lost MRR], "$#,##0") & "/mo"

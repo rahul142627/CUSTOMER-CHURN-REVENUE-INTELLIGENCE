@@ -1,0 +1,67 @@
+{
+  "name": "Executive SaaS Dark Navy Theme",
+  "dataColors": [
+    "#06B6D4",
+    "#818CF8",
+    "#10B981",
+    "#F43F5E",
+    "#F59E0B",
+    "#38BDF8",
+    "#A855F7",
+    "#EC4899",
+    "#64748B"
+  ],
+  "background": "#0F172A",
+  "foreground": "#F8FAFC",
+  "tableAccent": "#06B6D4",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "color": { "solid": { "color": "#1E293B" } },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#334155" } },
+            "radius": 10
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": true,
+            "color": { "solid": { "color": "#000000" } },
+            "position": "Outer",
+            "preset": "BottomRight"
+          }
+        ],
+        "title": [
+          {
+            "fontColor": { "solid": { "color": "#F8FAFC" } },
+            "fontSize": 12,
+            "fontFamily": "Segoe UI Semibold"
+          }
+        ],
+        "labels": [
+          {
+            "color": { "solid": { "color": "#F8FAFC" } },
+            "fontFamily": "Segoe UI"
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": { "solid": { "color": "#0F172A" } },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
+}
