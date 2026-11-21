@@ -10,11 +10,6 @@
 
 ---
 
-## 📌 EXECUTIVE DASHBOARD PREVIEW
-![Executive KPI Scorecard](Visualizations/01_executive_kpi_summary.png)
-
----
-
 ## 📖 PROJECT OVERVIEW & BUSINESS CONTEXT
 
 In recurring subscription models (SaaS, Telecom, Cloud Services), customer retention is the single most critical driver of company valuation and cash-flow health. While customer acquisition demands heavy capital expenditure (CAC), **customer churn directly destroys Monthly Recurring Revenue (MRR) and compresses Customer Lifetime Value (CLV)**.
@@ -373,11 +368,3 @@ jupyter notebook Python/exploratory_analysis.ipynb
 - [ ] **Automated Alert Webhook:** Connect high-risk model outputs directly to Slack / Microsoft Teams via Webhook to notify Account Managers immediately when an enterprise customer reaches >65% risk.
 
 ---
-
-## 👤 AUTHOR & CONTACT
-**Senior Data Analyst & Analytics Engineer**  
-- **LinkedIn:** [Your LinkedIn Profile](https://linkedin.com)  
-- **Portfolio:** [Your GitHub Profile](https://github.com)  
-- **Email:** your.email@domain.com  
-
-*Project built with standard industry best practices for enterprise presentation, technical interviews, and portfolio showcasing.*
